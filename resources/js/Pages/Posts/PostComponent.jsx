@@ -3,40 +3,54 @@ import React,{useState} from "react";
 
 export default function PostComponent ()
 {
-    const [formData, setFormData] = useState({
-        number: "",
-        title: "",
-        text: ""
-    });
+    // const [formData, setFormData] = useState({
+    //     number: "",
+    //     title: "",
+    //     text: ""
+    // });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
 
-        // Відправка даних на сервер
-        fetch("/save-petition", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                // Очистка форми або виконання інших дій після успішного збереження даних
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                // Обробка помилки під час збереження даних
-            });
-    };
+    //     // Відправка даних на сервер
+    //     fetch("/save-petition", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(formData)
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             console.log(data);
+    //             // Очистка форми або виконання інших дій після успішного збереження даних
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //             // Обробка помилки під час збереження даних
+    //         });
+    // };
 
-    const handleChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
+    // const handleChange = (event) => {
+    //     setFormData({
+    //         ...formData,
+    //         [event.target.name]: event.target.value
+    //     });
+    // };
+
+    handleChangeState=()=>{
+        this.useState({
+            number:"",
+            title:"",
+            text:"",
+
         });
-    };
+    }
+    handleChange=(e)=>{
+        this.useState({
+            [e.target.name]:e.target.value
+        });
+    }
 
 
 
