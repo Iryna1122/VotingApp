@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
-
+use Illuminate\Support\Facades\Session;
+use App\Models\User;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -34,7 +35,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+
+        // Отримати аутентифікованого користувача
+        $user = User::find(Auth::id());
+
+        // Отримати userId
+        $userId = $user->id;
+        Session::put('userId', $userId);
+
         return redirect()->intended(RouteServiceProvider::HOME);
+
     }
 
     /**

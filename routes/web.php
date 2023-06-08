@@ -33,7 +33,10 @@ Route::get('/', function () {
 
 Route::get('/posts',[PostController::class,'index'])->name('post.index');
 
-Route::get('/posts/info',[PostController::class],'info')->name('post.info');
+Route::get('/posts/info',[PostController::class,'info'])->name('post.info');
+
+Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

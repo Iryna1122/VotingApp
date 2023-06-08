@@ -15,7 +15,8 @@ export default function Dashboard({ auth }) {
                         <div className="p-6 text-gray-900">Ви успішно авторизувались! Вітаю ♥ ти згадав пароль)</div>
                     </div>
 
-                    <a href="/posts" className="btn btn-success">Створитии петицію</a>
+                    <a href="/posts" className="btn btn-success">Створити петицію</a><br/>
+                    <a href="/posts/info" className="btn btn-success">Переглянути петицію</a>
                 </div>
             </div>
         </AuthenticatedLayout>
