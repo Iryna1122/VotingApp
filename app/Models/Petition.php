@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Petition extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'numberOfPetition',
+        'nameOfPetition',
+        'textOfPetition',
+        'userId'
+    ];
 }

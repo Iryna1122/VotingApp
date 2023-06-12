@@ -20,13 +20,15 @@ class PostController extends Controller
 
     public function save(Request $request)
     {
+        dd($request);
+        var_dump($request);
         // Отримання даних з форми
         $number = $request->input('number');
         $title = $request->input('title');
         $text = $request->input('text');
         // Отримати значення з сесії
         $userId = Session::get('userId');
-
+var_dump($userId);
         // Збереження даних у базу даних
         $petition = new Petition;
         $petition->numberOfPetition = $number;
