@@ -16,7 +16,12 @@ export default function PostComponent ()
 
     }
 
-
+    const handleChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -39,12 +44,7 @@ export default function PostComponent ()
             // });
     };
 
-    const handleChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
-        });
-    };
+
 
 
 
@@ -55,16 +55,16 @@ export default function PostComponent ()
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="number" className="form-label">Number Petition:</label>
-                    <input className="form-control" type="number" id="number" name="number" value={formData.number} onChange={handleChange} />
+                    <input className="form-control" type="number" id="number" name="numberOfPetition" value={formData.numberOfPetition} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title:</label>
-                    <input type="text" className="form-control" id="title" name="title" value={formData.title} onChange={handleChange} />
+                    <input type="text" className="form-control" id="title" name="nameOfPetition" value={formData.nameOfPetition} onChange={handleChange} />
                 </div>
 
                 <div className="mb-3">
                     <label htmlFor="text" className="form-label">Text:</label>
-                    <textarea className="form-control" id="text" name="text" rows="4" value={formData.text} onChange={handleChange}></textarea>
+                    <textarea className="form-control" id="text" name="textOfPetition" rows="4" value={formData.textOfPetition} onChange={handleChange}></textarea>
                 </div>
                 <div>
                     <button type="submit" className="btn btn-info">Відправити петицію</button>
