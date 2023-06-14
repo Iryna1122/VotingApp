@@ -9,10 +9,5 @@ class Petition extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'numberOfPetition',
-        'nameOfPetition',
-        'textOfPetition',
-        'userId'
-    ];
+
 }

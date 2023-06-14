@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SanctumController;
+use App\Http\Controllers\SendController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,13 +32,16 @@ Route::get('/', function () {
 //{
 //    return Inertia::render('Posts/PostComponent');
 //});
-
+Route::get('/sanctum/csrf-cookie', [SanctumController::class, 'getCsrfCookie']);
 Route::get('/posts',[PostController::class,'index'])->name('post.index');
 
 Route::get('/posts/info',[PostController::class,'info'])->name('post.info');
+    Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
+Route::group(['middleware' => 'jwt.auth'], function () {
+});
 
-Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
-
+//Route::post('login', 'AuthController@login');
+//Route::get('user', 'AuthController@getUser')->middleware('jwt.auth');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
