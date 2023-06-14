@@ -38,6 +38,7 @@ Route::get('/posts/info',[PostController::class,'info'])->name('post.info');
 Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
 
 
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

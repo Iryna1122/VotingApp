@@ -1,61 +1,26 @@
 import { useState } from 'react'
 import { router } from '@inertiajs/react'
 
-export default function PostComponent ()
-{
-    const [formData, setFormData] = useState({
-        numberOfPetition: "",
-        nameOfPetition: "",
-        textOfPetition: "",
+export default function Edit() {
+    const [values, setValues] = useState({
+        first_name: "",
+        last_name: "",
+        email: "",
+    })
 
-    });
-
-    const New =()=>{
-        const [numberOfPetition,setName]=useState("");
-        const [nameOfPetition,setTitle]=useState("");
-        const [textOfPetition,setText]=useState("");
-
+    function handleChange(e) {
+        const key = e.target.id;
+        const value = e.target.value
+        setValues(values => ({
+            ...values,
+            [key]: value,
+        }))
     }
 
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        // Відправка даних на сервер
-        fetch("/posts/save", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-            .then((response) => {
-                console.log(response);
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data);
-                // Очистка форми
-                setFormData({
-                    numberOfPetition: "",
-                    nameOfPetition: "",
-                    textOfPetition: ""
-                });
-                // Виведення повідомлення
-                alert("Товар збережений");
-            }).catch((error) => {
-            console.error("Error:", error);
-            // Обробка помилки під час збереження даних
-        });
+    function handleSubmit(e) {
+        e.preventDefault()
+        router.post('/users', values)
     }
-    const handleChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
-        });
-    };
-
-
 
     return (
         <div className="col-7 ml-auto mr-auto">
@@ -85,4 +50,5 @@ export default function PostComponent ()
 
         </div>
     );
+
 }
