@@ -8,12 +8,12 @@ use Inertia\Inertia;
 use App\Models\Petition;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Http\FormRequest;
+use Inertia\Response;
 
 class PostController extends Controller
 {
     public function index()
     {
-
         return Inertia::render('Posts/PostComponent');
     }
 
@@ -29,23 +29,14 @@ class PostController extends Controller
         return to_route('users.index');
     }
 
-    public function info()
+    public function info(): Response
     {
-        //$data = Petition::all();
-
-        //return response()->json($data);
-       // return ($data);
-
-        //---------------------------------
-//        $petitions = Petition::all();
-//
-//        return Inertia::render('Posts/NewComponent', [
-//            'petitions' => $petitions,
-//        ]);
-        //---------------------------
-        return Inertia::render('Posts/NewComponent', [
+        $data = [
             'petitions' => Petition::all()
-        ]);
+        ];
+
+        return Inertia::render('Posts/NewComponent', ['data' => $data]);
+
     }
 
     public function save(Request $request)

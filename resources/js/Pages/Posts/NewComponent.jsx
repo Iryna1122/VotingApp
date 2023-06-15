@@ -1,13 +1,7 @@
-import React from 'react';
-import { Inertia } from '@inertiajs/inertia-react'; // Розкоментуйте цей рядок
-import { usePage } from '@inertiajs/inertia-react';
-
-//export const NewComponent = () => {
-  //  const { petitions } = usePage().props;
-    export  const NewComponent = ({ petitions }) => {
+export default function NewComponent({data}) {
     return (
         <div>
-            <table>
+            <table className='table'>
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -20,22 +14,38 @@ import { usePage } from '@inertiajs/inertia-react';
                 </tr>
                 </thead>
                 <tbody>
-                {petitions.map((item) => (
-                    <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.numberOfPetition}</td>
-                        <td>{item.nameOfPetition}</td>
-                        <td>{item.textOfPetition}</td>
-                        {/*<td>{item.userId}</td>*/}
-                        {/*<td>{item.created_at}</td>*/}
-                        {/*<td>{item.updated_at}</td>*/}
-                    </tr>
-                ))}
-                </tbody>
+
+                {/*<MyComponent petition={item}/>*/}
+                {data.petitions.map((item) => {
+                   return (
+                       <MyComponent petition={item}/>
+                   )
+                })
+                }
+               </tbody>
             </table>
         </div>
-    );
+    )
 };
+
+
+const MyComponent = ({petition}) => {
+    console.log(petition.nameOfPetition);
+    return (
+        <tr>
+            <td>{petition.id}</td>
+            <td>{petition.numberOfPetition}</td>
+            <td>{petition.nameOfPetition}</td>
+            <td>{petition.textOfPetition}</td>
+            <td>{petition.userId}</td>
+            <td>{petition.created_at}</td>
+            <td>{petition.updated_at}</td>
+        </tr>
+
+    )
+};
+
+
 // const InertiaNewComponent = () => {
 //     const { petitions } = usePage().props;
 //
@@ -49,7 +59,6 @@ import { usePage } from '@inertiajs/inertia-react';
 //export default InertiaNewComponent;
 
 
-//export default NewComponent;
 //export default NewComponent;
 
 // import React,{Component} from 'react';
