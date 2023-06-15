@@ -43,6 +43,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 //Route::post('login', 'AuthController@login');
 //Route::get('user', 'AuthController@getUser')->middleware('jwt.auth');
 
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
