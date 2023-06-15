@@ -17,6 +17,7 @@ export default function Dashboard({ auth }) {
 
                     <a href="/posts" className="btn btn-success">Створити петицію</a><br/>
                     <a href="/posts/info" className="btn btn-success">Переглянути петицію</a>
+                    <a href="/data" className="btn btn-success">Test page</a>
                 </div>
             </div>
         </AuthenticatedLayout>

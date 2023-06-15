@@ -31,7 +31,14 @@ class PostController extends Controller
 
     public function info()
     {
-        return Inertia::render('Posts/NewComponent');
+        $data = Petition::all();
+
+        return response()->json($data);
+
+//        return Inertia::render('Posts/NewComponent', [
+//            'petitions' => Petition::all(),
+//        ]);
+        //return Inertia::render('Posts/NewComponent');
     }
 
     public function save(Request $request)
