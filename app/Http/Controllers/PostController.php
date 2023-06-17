@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Petition;
 use Illuminate\Support\Facades\Session;
@@ -39,6 +40,14 @@ class PostController extends Controller
 
     }
 
+    public function destroy($id)
+    {
+        $petition=Petition::findOrFail($id);
+        $petition->delete();
+
+        return Redirect::to('Posts/PostComponent');
+    }
+
     public function save(Request $request)
     {
         $user = Auth::user();
@@ -53,27 +62,6 @@ class PostController extends Controller
         $petition->save();
         return ($request);
     }
-//    public function save(Request $request)
-//    {
-//        //dd($request);
-//
-//        // Отримання даних з форми
-//        $number = $request->input('numberOfPetition');
-//        $title = $request->input('nameOfPetition');
-//        $text = $request->input('textOfPetition');
-//        // Отримати значення з сесії
-////        $userId = Session::get('userId');
-////        var_dump($userId);
-//        // Збереження даних у базу даних
-//        $petition = new Petition;
-//        $petition->numberOfPetition = $number;
-//        $petition->nameOfPetition = $title;
-//        $petition->textOfPetition = $text;
-//        $petition->userId=1;
-//        $petition->save();
-//        $this->middleware('auth');
-//        // Повернення відповіді або перенаправлення на іншу сторінку
-//        return response()->json(['message' => 'Data saved successfully']);
-//    }
+
 
 }

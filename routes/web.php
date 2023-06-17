@@ -36,7 +36,10 @@ Route::get('/sanctum/csrf-cookie', [SanctumController::class, 'getCsrfCookie']);
 Route::get('/posts',[PostController::class,'index'])->name('post.index');
 
 Route::get('/posts/info',[PostController::class,'info'])->name('post.info');
-    Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
+Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
+
+Route::get('/delete/{id}',[PostController::class, 'destroy']);  //DELETE
+
 Route::group(['middleware' => 'jwt.auth'], function () {
 });
 
