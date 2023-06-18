@@ -54,6 +54,8 @@ export default function NewComponent({data}) {
                 }
                </tbody>
             </table>
+            <br/>
+            <a href="/dashboard" className="btn btn-success">Back</a>
         </div>
     )
 };
@@ -72,7 +74,7 @@ const MyComponent = ({petition}) => {
             <td>{petition.updated_at}</td>
             {/*<td><button className='btn btn-danger' type="button" onClick={() => handleDelete(petition.id)}>Delete</button></td>*/}
             <td><InertiaLink href={`/delete/${petition.id}`} method="get" as="button" className='btn btn-danger' type="button">Delete</InertiaLink></td>
-            <td> <InertiaLink href={`/update/${petition.id}`} method="get" as="button" className='btn btn-danger' type="button">Update</InertiaLink></td>
+            <td> <InertiaLink href={`/posts/update/${petition.id}`} method="get" as="button" className='btn btn-dark' type="button">Update</InertiaLink></td>
             {/*<td><button className='btn btn-success'><a href='Posts/UpdateComponent'></a>   Edit</button></td>*/}
             <td><button  className='btn btn-outline-info'>Details</button></td>
         </tr>

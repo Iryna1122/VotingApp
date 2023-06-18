@@ -64,4 +64,29 @@ class PostController extends Controller
     }
 
 
+    //EDIT
+    public function update($id)
+    {
+        $petition=Petition::findOrFail($id);
+        return Inertia::render('Posts/UpdateComponent', [
+            'petition' => $petition,
+        ]);
+    }
+
+
+    public function edit(Request $request,$id)
+    {
+        $petition=Petition::findOrFail($id);
+
+        $user = Auth::user();
+
+        $petition->numberOfPetition = $request->post('numberOfPetition');
+        $petition->nameOfPetition = $request->post('nameOfPetition');
+        $petition->textOfPetition =$request->post('textOfPetition');
+        $petition->userId = $user->id;
+//        $petition->created_at = new \DateTime();
+        $petition->updated_at = new \DateTime();
+        $petition->save();
+        return ($request);
+    }
 }

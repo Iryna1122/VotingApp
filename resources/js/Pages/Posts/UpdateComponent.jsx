@@ -3,13 +3,17 @@ import axios from "axios";
 import { router } from "@inertiajs/react";
 import NewComponent from "./NewComponent";
 
-export default function PostComponent() {
+export default function UpdateComponent({petition}) {
     const [values, setValues] = useState({
-        numberOfPetition: "",
-        nameOfPetition: "",
-        textOfPetition: "",
-    });
+         numberOfPetition: petition.numberOfPetition || "",
+         nameOfPetition: petition.nameOfPetition || "",
+        textOfPetition: petition.textOfPetition || "",
+       //--------------------------------------
+        // numberOfPetition:  "",
+        // nameOfPetition:  "",
+        // textOfPetition:  "",
 
+    });
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value;
@@ -21,7 +25,7 @@ export default function PostComponent() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        await router.post("/posts/save", values);
+        await router.post("/posts/edit", values);
         setValues({
             numberOfPetition: "",
             nameOfPetition: "",
@@ -32,7 +36,7 @@ export default function PostComponent() {
     return (
         <div className="col-7 ml-auto mr-auto">
             <h1 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
-                Потрібно заповнити форму для створення Вашої петиції
+                Потрібно заповнити форму для редагування Вашої петиції
             </h1>
 
             <form onSubmit={handleSubmit}>
@@ -79,7 +83,7 @@ export default function PostComponent() {
                 </div>
                 <div>
                     <button type="submit" className="btn btn-info">
-                        Відправити петицію
+                        Редагувати петицію
                     </button>
                 </div>
             </form>
