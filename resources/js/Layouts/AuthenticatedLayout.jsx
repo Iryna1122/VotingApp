@@ -128,7 +128,7 @@ export default function Authenticated({user, header, children}) {
 
             <main>{children}</main>
             <div className="footer-dark">
-                <footer>
+                <footer id='footer'>
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-6 col-md-3 item">
@@ -152,11 +152,11 @@ export default function Authenticated({user, header, children}) {
                                 <p>Веб-сайт розроблено в межах проекту Ради Європи «Подальша підтримка реформи
                                     кримінальної юстиції в Україні», що фінансується Урядом Данії.</p>
                             </div>
-                            <div className="col item social"><a href="#">
-                                <i className="icon ion-social-facebook"></i></a><a href="#"><i
-                                className="icon ion-social-twitter"></i></a><a href="#"><i
-                                className="icon ion-social-snapchat"></i></a><a href="#"><i
-                                className="icon ion-social-instagram"></i></a></div>
+                            <div className="col item social">
+                                <a href="https://uk-ua.facebook.com/"><i className="icon ion-social-facebook"></i></a><a href="#">
+                                <i className="icon ion-social-twitter"></i></a>
+                                <a href="#"><i className="icon ion-social-snapchat"></i></a>
+                                <a href="#"><i className="icon ion-social-instagram"></i></a></div>
                         </div>
 
                         <p className="copyright">2012-2019 Координаційний центр з надання правової допомоги | При використанні матеріалів сайту посилання обов'язкове</p>

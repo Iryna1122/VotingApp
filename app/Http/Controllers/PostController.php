@@ -50,9 +50,12 @@ class PostController extends Controller
         $data = [
             'petitions' => Petition::all()
         ];
-        return Redirect::route('/posts');
+        return redirect('/posts/info');
+        //return to_route('Posts/NewComponent');
+        //return Inertia::location('/');
+        //return Redirect::route('/posts');
         //return redirect('/');
-        //return Inertia::render('Posts/NewComponent',['data' => $data]);
+        return Inertia::render('Hello people');
     }
 
     public function save(Request $request)
@@ -67,7 +70,8 @@ class PostController extends Controller
         $petition->created_at = new \DateTime();
         $petition->updated_at = new \DateTime();
         $petition->save();
-        return ($request);
+        //return ($request);
+        return redirect('/posts/info');
     }
 
 

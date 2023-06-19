@@ -1,10 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 .footer-dark {
     padding:50px 0;
     color:#f0f9ff;
     background-color:#1e7836;
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:25%;
+    width:100%;
+    margin-bottom: 1px;
 }
 
 .footer-dark h3 {

@@ -1,6 +1,8 @@
 import React from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink, usePage, useForm } from "@inertiajs/inertia-react";
+import axios from "axios";
+import {Inertia} from "@inertiajs/inertia";
+import {InertiaLink, usePage, useForm} from "@inertiajs/inertia-react";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 const Edit = () => {
     const {post} = usePage().props;
@@ -16,40 +18,42 @@ const Edit = () => {
     }
 
 
-
 }
-export default function NewComponent({data}) {
+export default function NewComponent({data,auth}) {
 
     return (
         <div>
-            <table className='table'>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Number of Petition</th>
-                    <th>Name of Petition</th>
-                    <th>Text of Petition</th>
-                    <th>User ID</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th>Delete</th>
-                    <th>Edit</th>
-                    <th>Details</th>
-                </tr>
-                </thead>
-                <tbody>
+            <AuthenticatedLayout user={auth.user}>
 
-                {/*<MyComponent petition={item}/>*/}
-                {data.petitions.map((item) => {
-                   return (
-                       <MyComponent petition={item}/>
-                   )
-                })
-                }
-               </tbody>
-            </table>
-            <br/>
-            <a href="/dashboard" className="btn btn-success">Back</a>
+                <table className='table'>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Number of Petition</th>
+                        <th>Name of Petition</th>
+                        <th>Text of Petition</th>
+                        <th>User ID</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {/*<MyComponent petition={item}/>*/}
+                    {data.petitions.map((item) => {
+                        return (
+                            <MyComponent petition={item}/>
+                        )
+                    })
+                    }
+                    </tbody>
+                </table>
+                <br/>
+                {/*<a href="/dashboard" className="btn btn-success">Back</a>*/}
+            </AuthenticatedLayout>
         </div>
     )
 };
@@ -57,16 +61,18 @@ export default function NewComponent({data}) {
 
 const MyComponent = ({petition}) => {
     console.log(petition.nameOfPetition);
-    // const handleDelete = async (id) => {
-    //     console.log(123);
-    //     try {
-    //         await axios.delete(`/delete/{id}`);
-    //         location.href='/posts/info';//
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
+
+    async function handleDelete()  {
+        console.log(123);
+        try {
+            await axios.delete(`/posts/delete/{id}`);
+            location.href = '/posts/info';//
+        } catch (error) {
+            console.error(error);
+        }
+    }
     return (
+
         <tr>
             <td>{petition.id}</td>
             <td>{petition.numberOfPetition}</td>
@@ -75,11 +81,18 @@ const MyComponent = ({petition}) => {
             <td>{petition.userId}</td>
             <td>{petition.created_at}</td>
             <td>{petition.updated_at}</td>
-            {/*<td><button className='btn btn-danger' type="button" onClick={handleDelete(petition.id)}>Delete</button></td>*/}
-            <td><InertiaLink href={`/posts/delete/${petition.id}`} method="get" as="button" className='btn btn-warning' type="button">Delete</InertiaLink></td>
-            <td><InertiaLink href={`/posts/update/${petition.id}`} method="get" as="button" className='btn btn-info' type="button">Update</InertiaLink></td>
+
+            <td>
+                {/*<form method='post'>*/}
+                    <button className='btn btn-danger' type="button" onClick={handleDelete(petition.id)}>Delete</button>
+                {/*</form>*/}
+            </td>
+            {/*<td><InertiaLink href={`/posts/delete/${petition.id}`} method="get" as="button" className='btn btn-warning' type="button">Delete</InertiaLink></td>*/}
+            <td><InertiaLink href={`/posts/update/${petition.id}`} method="get" as="button" className='btn btn-info'
+                             type="button">Update</InertiaLink></td>
             {/*<td><button className='btn btn-success'><a href='Posts/UpdateComponent'></a>   Edit</button></td>*/}
-            <td><InertiaLink href={`/posts/details/${petition.id}`} method="get" as="button" className='btn btn-info' type="button">Datails</InertiaLink></td>
+            <td><InertiaLink href={`/posts/details/${petition.id}`} method="get" as="button" className='btn btn-info'
+                             type="button">Details</InertiaLink></td>
         </tr>
 
     )

@@ -44,7 +44,7 @@ Route::post('/posts/edit/{id}', [PostController::class, 'edit'])->name('post.edi
 
 Route::get('/posts/details/{id}',[PostController::class,'details'])->name('post.details');//DETAILS
 
-Route::get('/posts/delete/{id}',[PostController::class, 'destroy'])->name('post.destroy');  //DELETE
+Route::delete('/posts/delete/{id}',[PostController::class, 'destroy'])->name('post.destroy');  //DELETE
 
 Route::group(['middleware' => 'jwt.auth'], function () {
 });
