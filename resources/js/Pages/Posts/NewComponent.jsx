@@ -15,17 +15,11 @@ const Edit = () => {
         put(route("posts.update", post.id));
     }
 
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`/delete`);
-            location.reload();//
-        } catch (error) {
-            console.error(error);
-        }
-    };
+
 
 }
 export default function NewComponent({data}) {
+
     return (
         <div>
             <table className='table'>
@@ -63,6 +57,15 @@ export default function NewComponent({data}) {
 
 const MyComponent = ({petition}) => {
     console.log(petition.nameOfPetition);
+    // const handleDelete = async (id) => {
+    //     console.log(123);
+    //     try {
+    //         await axios.delete(`/delete/{id}`);
+    //         location.href='/posts/info';//
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
     return (
         <tr>
             <td>{petition.id}</td>
@@ -72,11 +75,11 @@ const MyComponent = ({petition}) => {
             <td>{petition.userId}</td>
             <td>{petition.created_at}</td>
             <td>{petition.updated_at}</td>
-            {/*<td><button className='btn btn-danger' type="button" onClick={() => handleDelete(petition.id)}>Delete</button></td>*/}
-            <td><InertiaLink href={`/delete/${petition.id}`} method="get" as="button" className='btn btn-danger' type="button">Delete</InertiaLink></td>
-            <td> <InertiaLink href={`/posts/update/${petition.id}`} method="get" as="button" className='btn btn-dark' type="button">Update</InertiaLink></td>
+            {/*<td><button className='btn btn-danger' type="button" onClick={handleDelete(petition.id)}>Delete</button></td>*/}
+            <td><InertiaLink href={`/posts/delete/${petition.id}`} method="get" as="button" className='btn btn-warning' type="button">Delete</InertiaLink></td>
+            <td><InertiaLink href={`/posts/update/${petition.id}`} method="get" as="button" className='btn btn-info' type="button">Update</InertiaLink></td>
             {/*<td><button className='btn btn-success'><a href='Posts/UpdateComponent'></a>   Edit</button></td>*/}
-            <td><button  className='btn btn-outline-info'>Details</button></td>
+            <td><InertiaLink href={`/posts/details/${petition.id}`} method="get" as="button" className='btn btn-info' type="button">Datails</InertiaLink></td>
         </tr>
 
     )

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
-
-export default function Authenticated({ user, header, children }) {
+import {Link} from '@inertiajs/react';
+import { InertiaLink } from "@inertiajs/inertia-react";
+export default function Authenticated({user, header, children}) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -16,7 +16,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <img src="https://legalaid.gov.ua/wp-content/themes/legalaidTheme/assets/img/icons/logo.svg" alt=""/>
                                 </Link>
                             </div>
 
@@ -24,6 +24,13 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Ласкаво просимо в нашу голосувалку!
                                 </NavLink>
+                                <NavLink href="/posts" activeClassName="btn-success" className="btn btn-out-success">
+                                    Створити петицію
+                                </NavLink>
+                                <NavLink href="/posts/info" className="btn " >
+                                    Переглянути всі петиції
+                                </NavLink>
+
                             </div>
                         </div>
 
@@ -93,7 +100,7 @@ export default function Authenticated({ user, header, children }) {
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            ТУТ МОЖЕ БУТИ ТЕ ЩО ТОБІ ТРЕБА
+
                         </ResponsiveNavLink>
                     </div>
 
@@ -120,6 +127,42 @@ export default function Authenticated({ user, header, children }) {
             )}
 
             <main>{children}</main>
+            <div className="footer-dark">
+                <footer>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-6 col-md-3 item">
+                                <h3>Services</h3>
+                                <ul>
+                                    <li><a href="#">Web design</a></li>
+                                    <li><a href="#">Development</a></li>
+                                    <li><a href="#">Hosting</a></li>
+                                </ul>
+                            </div>
+                            <div className="col-sm-6 col-md-3 item">
+                                <h3>About</h3>
+                                <ul>
+                                    <li><a href="#">Company</a></li>
+                                    <li><a href="#">Team</a></li>
+                                    <li><a href="#">Careers</a></li>
+                                </ul>
+                            </div>
+                            <div className="col-md-6 item text">
+                                <h3>Безоплатна правова політика</h3>
+                                <p>Веб-сайт розроблено в межах проекту Ради Європи «Подальша підтримка реформи
+                                    кримінальної юстиції в Україні», що фінансується Урядом Данії.</p>
+                            </div>
+                            <div className="col item social"><a href="#">
+                                <i className="icon ion-social-facebook"></i></a><a href="#"><i
+                                className="icon ion-social-twitter"></i></a><a href="#"><i
+                                className="icon ion-social-snapchat"></i></a><a href="#"><i
+                                className="icon ion-social-instagram"></i></a></div>
+                        </div>
+
+                        <p className="copyright">2012-2019 Координаційний центр з надання правової допомоги | При використанні матеріалів сайту посилання обов'язкове</p>
+                    </div>
+                </footer>
+            </div>
         </div>
     );
 }

@@ -42,10 +42,17 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+
         $petition=Petition::findOrFail($id);
         $petition->delete();
+        //dd($id);
 
-        return Redirect::to('Posts/PostComponent');
+        $data = [
+            'petitions' => Petition::all()
+        ];
+        return Redirect::route('/posts');
+        //return redirect('/');
+        //return Inertia::render('Posts/NewComponent',['data' => $data]);
     }
 
     public function save(Request $request)
@@ -88,5 +95,15 @@ class PostController extends Controller
         $petition->updated_at = new \DateTime();
         $petition->save();
         return ($request);
+    }
+
+    public function details($id)
+    {
+        $petition=Petition::findOrFail($id);
+
+        return Inertia::render('Posts/DetailsComponent', [
+            'petition' => $petition,
+        ]);
+
     }
 }

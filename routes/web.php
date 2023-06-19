@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,9 @@ Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
 Route::get('/posts/update/{id}', [PostController::class, 'update'])->name('post.update');//UPDATE
 Route::post('/posts/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
 
-Route::get('/delete/{id}',[PostController::class, 'destroy']);  //DELETE
+Route::get('/posts/details/{id}',[PostController::class,'details'])->name('post.details');//DETAILS
+
+Route::get('/posts/delete/{id}',[PostController::class, 'destroy'])->name('post.destroy');  //DELETE
 
 Route::group(['middleware' => 'jwt.auth'], function () {
 });
