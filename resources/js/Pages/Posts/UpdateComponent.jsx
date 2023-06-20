@@ -23,14 +23,26 @@ export default function UpdateComponent({petition}) {
         }));
     }
 
-    async function handleSubmit(e) {
+    // function handleSubmit(e) {
+    //     e.preventDefault();
+    //     router.put("/posts/edit", values);
+    //     setValues({
+    //         numberOfPetition: "",
+    //         nameOfPetition: "",
+    //         textOfPetition: "",
+    //     });
+    // }
+
+    function handleSubmit(e) {
         e.preventDefault();
-        await router.post("/posts/edit", values);
+        console.log(petition.id);
+        router.get('/posts/update/'+petition.id);
+
         setValues({
-            numberOfPetition: "",
-            nameOfPetition: "",
-            textOfPetition: "",
-        });
+                    numberOfPetition: "",
+                    nameOfPetition: "",
+                    textOfPetition: "",
+                });
     }
 
     return (

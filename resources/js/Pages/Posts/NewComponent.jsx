@@ -3,6 +3,8 @@ import axios from "axios";
 import {Inertia} from "@inertiajs/inertia";
 import {InertiaLink, usePage, useForm} from "@inertiajs/inertia-react";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+//import {router} from "@inertiajs/react";
+
 
 const Edit = () => {
     const {post} = usePage().props;
@@ -19,7 +21,7 @@ const Edit = () => {
 
 
 }
-export default function NewComponent({data,auth}) {
+export default function NewComponent({data, auth}) {
 
     return (
         <div>
@@ -45,7 +47,7 @@ export default function NewComponent({data,auth}) {
                     {/*<MyComponent petition={item}/>*/}
                     {data.petitions.map((item) => {
                         return (
-                            <MyComponent petition={item}/>
+                            <MyComponent key={item.id} petition={item}/>
                         )
                     })
                     }
@@ -62,15 +64,17 @@ export default function NewComponent({data,auth}) {
 const MyComponent = ({petition}) => {
     console.log(petition.nameOfPetition);
 
-    async function handleDelete()  {
-        console.log(123);
-        try {
-            await axios.delete(`/posts/delete/{id}`);
-            location.href = '/posts/info';//
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //  function handleDelete(id) {
+    //     console.log(123);
+    //      {
+    //         axios.delete(`/posts/destroy/${id}`).then(response => {
+    //             window.location.href = '/posts/info'
+    //         }).catch(error => console.log(error));
+    //
+    //     }
+    // }
+
+
     return (
 
         <tr>
@@ -83,12 +87,24 @@ const MyComponent = ({petition}) => {
             <td>{petition.updated_at}</td>
 
             <td>
-                {/*<form method='post'>*/}
-                    <button className='btn btn-danger' type="button" onClick={handleDelete(petition.id)}>Delete</button>
+
+
+                {/*<form onSubmit={()=>handleDelete(petition.id)} method="POST">*/}
+                {/*    /!*@csrf*!/*/}
+
+                {/*    <input type="submit" className='btn btn-outline-success' name="delete" value="Delete"/>*/}
                 {/*</form>*/}
+
+                {/*<form method='get'>*/}
+                {/*    /!*<button className='btn btn-outline-success' type="submit" onClick={handleDelete(petition.id)}>Delete</button>*!/*/}
+                {/*    /!*<button className='btn btn-outline-success' type="submit" onClick={handleDelete(petition.id)}>Delete</button>*!/*/}
+
+                {/*<button className='btn btn-outline-success' type="button" onClick={()=>handleDelete(petition.id)}>Delete</button>*/}
+                {/*</form>*/}
+                <InertiaLink href={`/posts/destroy/${petition.id}`} method="delete" as="button" className='btn btn-warning' type="button">Delete</InertiaLink>
             </td>
-            {/*<td><InertiaLink href={`/posts/delete/${petition.id}`} method="get" as="button" className='btn btn-warning' type="button">Delete</InertiaLink></td>*/}
-            <td><InertiaLink href={`/posts/update/${petition.id}`} method="get" as="button" className='btn btn-info'
+
+            <td><InertiaLink href={`/posts/edit/${petition.id}`} method="get" as="button" className='btn btn-info'
                              type="button">Update</InertiaLink></td>
             {/*<td><button className='btn btn-success'><a href='Posts/UpdateComponent'></a>   Edit</button></td>*/}
             <td><InertiaLink href={`/posts/details/${petition.id}`} method="get" as="button" className='btn btn-info'

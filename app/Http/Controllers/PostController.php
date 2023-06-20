@@ -10,6 +10,7 @@ use App\Models\Petition;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Http\FormRequest;
 use Inertia\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PostController extends Controller
 {
@@ -40,22 +41,24 @@ class PostController extends Controller
 
     }
 
-    public function destroy($id)
+//    public function destroy(Petition $petition):RedirectResponse
+//    {
+//        $petition->delete();
+//        return Redirect::route('/posts');
+//    }
+    public function destroy($id):RedirectResponse
     {
 
-        $petition=Petition::findOrFail($id);
+        $petition = Petition::findOrFail($id);
         $petition->delete();
-        //dd($id);
-
-        $data = [
-            'petitions' => Petition::all()
-        ];
         return redirect('/posts/info');
+        //return redirect()->route('posts.index');
+        //return redirect('/posts/info');
         //return to_route('Posts/NewComponent');
         //return Inertia::location('/');
         //return Redirect::route('/posts');
         //return redirect('/');
-        return Inertia::render('Hello people');
+        //return Inertia::render('Hello people');
     }
 
     public function save(Request $request)
@@ -65,7 +68,7 @@ class PostController extends Controller
         $petition = new Petition;
         $petition->numberOfPetition = $request->post('numberOfPetition');
         $petition->nameOfPetition = $request->post('nameOfPetition');
-        $petition->textOfPetition =$request->post('textOfPetition');
+        $petition->textOfPetition = $request->post('textOfPetition');
         $petition->userId = $user->id;
         $petition->created_at = new \DateTime();
         $petition->updated_at = new \DateTime();
@@ -76,34 +79,38 @@ class PostController extends Controller
 
 
     //EDIT
-    public function update($id)
+    public function edit($id)
     {
-        $petition=Petition::findOrFail($id);
+        $petition = Petition::findOrFail($id);
         return Inertia::render('Posts/UpdateComponent', [
             'petition' => $petition,
         ]);
     }
 
 
-    public function edit(Request $request,$id)
+    public function update(Request $request, $id):RedirectResponse
     {
-        $petition=Petition::findOrFail($id);
 
-        $user = Auth::user();
+        $petition = Petition::findOrFail($id);
 
-        $petition->numberOfPetition = $request->post('numberOfPetition');
-        $petition->nameOfPetition = $request->post('nameOfPetition');
-        $petition->textOfPetition =$request->post('textOfPetition');
-        $petition->userId = $user->id;
-//        $petition->created_at = new \DateTime();
-        $petition->updated_at = new \DateTime();
-        $petition->save();
-        return ($request);
+        $petition->update($request->all());
+        return redirect('/posts/info');
+
+        //$user = Auth::user();
+
+//        $petition->numberOfPetition = $request->post('numberOfPetition');
+//        $petition->nameOfPetition = $request->post('nameOfPetition');
+//        $petition->textOfPetition =$request->post('textOfPetition');
+//        $petition->userId = $user->id;
+////        $petition->created_at = new \DateTime();
+//        $petition->updated_at = new \DateTime();
+//        $petition->save();
+//        return ($request);
     }
 
     public function details($id)
     {
-        $petition=Petition::findOrFail($id);
+        $petition = Petition::findOrFail($id);
 
         return Inertia::render('Posts/DetailsComponent', [
             'petition' => $petition,

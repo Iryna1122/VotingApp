@@ -7,12 +7,13 @@
     padding:50px 0;
     color:#f0f9ff;
     background-color:#1e7836;
-    position:fixed;
+    position:static;
     left:0px;
     bottom:0px;
-    height:25%;
+    height:30%;
     width:100%;
-    margin-bottom: 1px;
+
+    margin-top: 110px;
 }
 
 .footer-dark h3 {

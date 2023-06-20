@@ -39,13 +39,14 @@ Route::get('/posts',[PostController::class,'index'])->name('post.index');
 Route::get('/posts/info',[PostController::class,'info'])->name('post.info');
 Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
 
-Route::get('/posts/update/{id}', [PostController::class, 'update'])->name('post.update');//UPDATE
-Route::post('/posts/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+Route::get('/posts/update/', [PostController::class, 'update'])->name('post.update');//UPDATE
 
 Route::get('/posts/details/{id}',[PostController::class,'details'])->name('post.details');//DETAILS
 
-Route::delete('/posts/delete/{id}',[PostController::class, 'destroy'])->name('post.destroy');  //DELETE
+Route::delete('/posts/destroy/{id}',[PostController::class, 'destroy'])->name('post.destroy');  //DELETE
 
+Route::resource('/posts', PostController::class);
 Route::group(['middleware' => 'jwt.auth'], function () {
 });
 
