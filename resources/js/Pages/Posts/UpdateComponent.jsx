@@ -3,7 +3,8 @@ import axios from "axios";
 import { router } from "@inertiajs/react";
 import NewComponent from "./NewComponent";
 
-export default function UpdateComponent({petition}) {
+export default function UpdateComponent({petition})
+{
     const [values, setValues] = useState({
          numberOfPetition: petition.numberOfPetition || "",
          nameOfPetition: petition.nameOfPetition || "",
@@ -33,16 +34,19 @@ export default function UpdateComponent({petition}) {
     //     });
     // }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
+        try {
         console.log(petition.id);
-        router.get('/posts/update/'+petition.id);
-
-        setValues({
-                    numberOfPetition: "",
-                    nameOfPetition: "",
-                    textOfPetition: "",
-                });
+            await router.post(`/posts/update/${petition.id}`,values);
+            setValues({
+                numberOfPetition: "",
+                nameOfPetition: "",
+                textOfPetition: "",
+            });
+        } catch (error) {
+           console.error(error);
+       }
     }
 
     return (

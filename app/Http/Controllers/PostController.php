@@ -79,7 +79,7 @@ class PostController extends Controller
 
 
     //EDIT
-    public function edit($id)
+    public function edit($id):Response
     {
         $petition = Petition::findOrFail($id);
         return Inertia::render('Posts/UpdateComponent', [
@@ -88,13 +88,34 @@ class PostController extends Controller
     }
 
 
-    public function update(Request $request, $id):RedirectResponse
+    public function update(Request $request,$id):RedirectResponse
     {
-
+//
+//        $request->validate([
+//            'numberOfPetition'=>'required|integer|min:1',
+//            'nameOfPetition'=>'required|string|max:255',
+//            'textOfPetition'=>'required|text'
+//        ]);
+        //dd($request);
         $petition = Petition::findOrFail($id);
 
+        $petition->numberOfPetition = $request->post('numberOfPetition');
+        $petition->nameOfPetition = $request->post('nameOfPetition');
+        $petition->textOfPetition =$request->post('textOfPetition');
+     //   $petition->userId = $user->id;
+//       $petition->created_at = new \DateTime();
+        $petition->updated_at = new \DateTime();
         $petition->update($request->all());
-        return redirect('/posts/info');
+       // Petition::find($id)->update($request->all());
+        //dd($id);
+//        $petition->update([
+//           'numberOfPetition'=>$request->numberOfPetition,
+//           'nameOfPetition'=>$request->nameOfPetition,
+//           'textOfPetition'=>$request->textOfPetition,
+//        ]);
+
+       // $petition->update($request->all());
+
 
         //$user = Auth::user();
 
@@ -105,13 +126,14 @@ class PostController extends Controller
 ////        $petition->created_at = new \DateTime();
 //        $petition->updated_at = new \DateTime();
 //        $petition->save();
-//        return ($request);
+       return redirect('/posts/info');
     }
 
-    public function details($id)
+    public function details($id):Response
     {
         $petition = Petition::findOrFail($id);
 
+        //dd($petition);
         return Inertia::render('Posts/DetailsComponent', [
             'petition' => $petition,
         ]);

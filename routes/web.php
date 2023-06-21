@@ -40,7 +40,7 @@ Route::get('/posts/info',[PostController::class,'info'])->name('post.info');
 Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
 
 Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
-Route::get('/posts/update/', [PostController::class, 'update'])->name('post.update');//UPDATE
+Route::post('/posts/update/{id}', [PostController::class, 'update'])->name('post.update');//UPDATE
 
 Route::get('/posts/details/{id}',[PostController::class,'details'])->name('post.details');//DETAILS
 
