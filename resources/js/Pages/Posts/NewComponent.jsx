@@ -74,7 +74,6 @@ const MyComponent = ({petition}) => {
     //     }
     // }
 
-
     return (
 
         <tr>
@@ -88,19 +87,6 @@ const MyComponent = ({petition}) => {
 
             <td>
 
-
-                {/*<form onSubmit={()=>handleDelete(petition.id)} method="POST">*/}
-                {/*    /!*@csrf*!/*/}
-
-                {/*    <input type="submit" className='btn btn-outline-success' name="delete" value="Delete"/>*/}
-                {/*</form>*/}
-
-                {/*<form method='get'>*/}
-                {/*    /!*<button className='btn btn-outline-success' type="submit" onClick={handleDelete(petition.id)}>Delete</button>*!/*/}
-                {/*    /!*<button className='btn btn-outline-success' type="submit" onClick={handleDelete(petition.id)}>Delete</button>*!/*/}
-
-                {/*<button className='btn btn-outline-success' type="button" onClick={()=>handleDelete(petition.id)}>Delete</button>*/}
-                {/*</form>*/}
                 <InertiaLink href={`/posts/destroy/${petition.id}`} method="delete" as="button" className='btn btn-warning' type="button">Delete</InertiaLink>
             </td>
 
@@ -114,34 +100,3 @@ const MyComponent = ({petition}) => {
     )
 };
 
-
-// const InertiaNewComponent = () => {
-//     const { petitions } = usePage().props;
-//
-//     return (
-//         <Inertia>
-//             <NewComponent petitions={petitions} />
-//         </Inertia>
-//     );
-// };
-
-//export default InertiaNewComponent;
-
-
-//export default NewComponent;
-
-// import React,{Component} from 'react';
-// export default class NewComponent extends Component
-// {
-// render(){
-// return(
-//     <div>
-//        <h2>This is something from Petition</h2>
-//         <p>Details</p>
-// <br/>
-//         <a href="/dashboard" className="btn btn-success">Back</a>
-//
-//     </div>
-// )
-// }
-// }
