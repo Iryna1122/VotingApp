@@ -24,17 +24,7 @@ export default function UpdateComponent({petition})
         }));
     }
 
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     router.put("/posts/edit", values);
-    //     setValues({
-    //         numberOfPetition: "",
-    //         nameOfPetition: "",
-    //         textOfPetition: "",
-    //     });
-    // }
-
-    async function handleSubmit(e) {
+      async function handleSubmit(e) {
         e.preventDefault();
         try {
         console.log(petition.id);

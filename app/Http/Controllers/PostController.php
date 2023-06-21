@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Petition;
+use App\Models\Petitioncount;
+use App\Models\Petitionuser;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Http\FormRequest;
 use Inertia\Response;
@@ -42,7 +44,7 @@ class PostController extends Controller
     }
 
 
-    public function destroy($id):RedirectResponse
+    public function destroy($id): RedirectResponse
     {
 
         $petition = Petition::findOrFail($id);
@@ -75,7 +77,7 @@ class PostController extends Controller
 
 
     //EDIT
-    public function edit($id):Response
+    public function edit($id): Response
     {
         $petition = Petition::findOrFail($id);
         return Inertia::render('Posts/UpdateComponent', [
@@ -84,7 +86,7 @@ class PostController extends Controller
     }
 
 
-    public function update(Request $request,$id):RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
 //
 //        $request->validate([
@@ -97,16 +99,16 @@ class PostController extends Controller
 
         $petition->numberOfPetition = $request->post('numberOfPetition');
         $petition->nameOfPetition = $request->post('nameOfPetition');
-        $petition->textOfPetition =$request->post('textOfPetition');
-     //   $petition->userId = $user->id;
+        $petition->textOfPetition = $request->post('textOfPetition');
+        //   $petition->userId = $user->id;
 //       $petition->created_at = new \DateTime();
         $petition->updated_at = new \DateTime();
         $petition->update($request->all());
 
-       return redirect('/posts/info');
+        return redirect('/posts/info');
     }
 
-    public function details($id):Response
+    public function details($id): Response
     {
         $petition = Petition::findOrFail($id);
 
@@ -116,6 +118,7 @@ class PostController extends Controller
         ]);
 
     }
+
     public function voting(): Response
     {
         $data = [
@@ -125,4 +128,54 @@ class PostController extends Controller
         return Inertia::render('Posts/VotingComponent', ['data' => $data]);
 
     }
+
+    public function votingCount(Request $request)
+    {
+        $user = Auth::user();
+        $userId= $user->id;
+        $petitionId = $request->post('petitionId');
+
+        $existingPetitionCount = Petitioncount::where('petitionId', $petitionId)->first();
+
+
+
+        //Petitionuser
+
+
+        $existingPetitionUser = Petitionuser::where('petitionId', $petitionId)
+            ->where('userId', $userId)
+            ->first();
+        if ($existingPetitionUser) {
+
+            // Користувач вже голосував за цю петицію
+            echo ('Ви вже віддали свій голос за цю петицію.');
+            // return redirect('/dashboard');
+        }
+        else{
+            if ($existingPetitionCount) {
+                // Якщо запис з таким petitionId вже існує, інкрементуйте countVotes
+                $existingPetitionCount->countVotes++;
+                $existingPetitionCount->save();
+
+
+            } else {
+                // Якщо запису з таким petitionId немає, створіть новий запис
+                $newPetitionCount = new Petitioncount();
+                $newPetitionCount->countVotes = 1;
+                $newPetitionCount->petitionId = $petitionId;
+                $newPetitionCount->save();
+            }
+
+            /////////////////////////////
+            $petitionuser=new Petitionuser();
+            $petitionuser->userId=$userId;
+            $petitionuser->petitionId=$petitionId;
+
+            $petitionuser->save();
+        }
+
+        return redirect('/dashboard');
+    }
+
+
 }

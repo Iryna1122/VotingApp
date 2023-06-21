@@ -48,6 +48,8 @@ Route::delete('/posts/destroy/{id}',[PostController::class, 'destroy'])->name('p
 
 Route::get('/posts/voting',[PostController::class,'voting'])->name('post.voting');  //VOTING
 
+Route::post('/posts/votingCount', [PostController::class, 'votingCount'])->name('post.votingCount');
+
 Route::resource('/posts', PostController::class);
 Route::group(['middleware' => 'jwt.auth'], function () {
 });
