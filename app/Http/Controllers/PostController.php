@@ -41,11 +41,7 @@ class PostController extends Controller
 
     }
 
-//    public function destroy(Petition $petition):RedirectResponse
-//    {
-//        $petition->delete();
-//        return Redirect::route('/posts');
-//    }
+
     public function destroy($id):RedirectResponse
     {
 
@@ -106,26 +102,7 @@ class PostController extends Controller
 //       $petition->created_at = new \DateTime();
         $petition->updated_at = new \DateTime();
         $petition->update($request->all());
-       // Petition::find($id)->update($request->all());
-        //dd($id);
-//        $petition->update([
-//           'numberOfPetition'=>$request->numberOfPetition,
-//           'nameOfPetition'=>$request->nameOfPetition,
-//           'textOfPetition'=>$request->textOfPetition,
-//        ]);
 
-       // $petition->update($request->all());
-
-
-        //$user = Auth::user();
-
-//        $petition->numberOfPetition = $request->post('numberOfPetition');
-//        $petition->nameOfPetition = $request->post('nameOfPetition');
-//        $petition->textOfPetition =$request->post('textOfPetition');
-//        $petition->userId = $user->id;
-////        $petition->created_at = new \DateTime();
-//        $petition->updated_at = new \DateTime();
-//        $petition->save();
        return redirect('/posts/info');
     }
 
@@ -137,6 +114,15 @@ class PostController extends Controller
         return Inertia::render('Posts/DetailsComponent', [
             'petition' => $petition,
         ]);
+
+    }
+    public function voting(): Response
+    {
+        $data = [
+            'petitions' => Petition::all()
+        ];
+
+        return Inertia::render('Posts/VotingComponent', ['data' => $data]);
 
     }
 }

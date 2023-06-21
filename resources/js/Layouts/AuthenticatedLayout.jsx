@@ -30,6 +30,9 @@ export default function Authenticated({user, header, children}) {
                                 <NavLink href="/posts/info" className="btn " >
                                     Переглянути всі петиції
                                 </NavLink>
+                                <NavLink href="/posts/voting" className="btn " >
+                                   Проголосувати
+                                </NavLink>
 
                             </div>
                         </div>
