@@ -39,6 +39,9 @@ Route::get('/posts',[PostController::class,'index'])->name('post.index');
 Route::get('/posts/info',[PostController::class,'info'])->name('post.info');
 Route::post('/posts/save', [PostController::class, 'save'])->name('post.save');
 
+Route::get('posts/addRole',[PostController::class,'addRole'])->name('post.addRole');// TO ADD ROLE
+Route::post('posts/saveRole',[PostController::class,'saveRole'])->name('post.saveRole');
+
 Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
 Route::post('/posts/update/{id}', [PostController::class, 'update'])->name('post.update');//UPDATE
 

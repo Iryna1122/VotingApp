@@ -27,6 +27,11 @@ export default function Authenticated({user, header, children}) {
                                 <NavLink href="/posts" activeClassName="btn-success" className="btn btn-out-success">
                                     Створити петицію
                                 </NavLink>
+                                {user.roleId === 1 && (
+                                    <NavLink href="/posts/addRole" activeClassName="btn-success" className="btn btn-out-success">
+                                        Add Role
+                                    </NavLink>
+                                )}
                                 <NavLink href="/posts/info" className="btn " >
                                     Переглянути всі петиції
                                 </NavLink>

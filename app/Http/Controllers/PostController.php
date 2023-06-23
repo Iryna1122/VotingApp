@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -9,6 +10,7 @@ use Inertia\Inertia;
 use App\Models\Petition;
 use App\Models\Petitioncount;
 use App\Models\Petitionuser;
+use App\Models\Role;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Http\FormRequest;
 use Inertia\Response;
@@ -21,6 +23,19 @@ class PostController extends Controller
         return Inertia::render('Posts/PostComponent');
     }
 
+    public function addRole()
+    {
+        return Inertia::render('Posts/RoleComponent');
+    }
+
+    public function saveRole(Request $request)
+    {
+        $role=new Role();
+        $role->nameOfRole=$request->post('nameOfRole');
+
+        $role->save();
+        return redirect('/posts/info');
+    }
 
     public function store(Request $request)
     {
